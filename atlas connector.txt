@@ -1,0 +1,1 @@
+"mongodb+srv://general_admin_user:m8bIuSqxVCTsPA3V@cluster0.jnflv.mongodb.net/?retryWrites=true&w=majority"

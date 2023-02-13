@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+		<button class = "drmd" onclick="toggle_dark()" >☽</button>
+
+    <div class = navbar>
+   
+    </div>
+
+    <div class = question>
+
+        
+        <div id = content> </div>
+        
+        <div id =solution></div>
+        
+        <button onclick="finish()">finish</button>
+        
+        <button onclick="tip()" class = tipbutton>tip?</button>
+        <div id=tip></div>
+    </div>
+</body>
+</html>
+
+
+<script>
+
+    var json = "{\"title\": \"10 : 300 <p></p> <input><p></p>\", \"solution\": \"[3000]\", \"tip\": \"\\n<p>Beim <span>dividieren mit gro\\u00dfen zahlen</span> musst du nullen streichen:</p>\\n\\n<p>4<span>0</span> : 2 = ?</p>\\n\\n<p>du streichst bei der ersten zahl die null und dann f\\u00fcgst du sie bei der zweiten zahl wieder hinzu:</p>\\n<p>4<span>0</span> : 2 = 2<span>0</p>\\n<p>4<span>00</span> : 2 = 2<span>00</p>\\n<p>4<span>000</span> : 2 = 2<span>000</p>\\n<p>wenn beide zahlen eine null haben dann streichst du beide nullen</p>\\n<p>4<span>0</span> : 2<span>0</span> = 4 : 2 = 2</p>\\n<p></p>\\n\"}"
+    q = JSON.parse(json)
+    s = JSON.parse(q.solution)
+    // s = q.solution
+    console.log(s);
+
+	if (!q.title.includes("<input")){
+		q.title += "<br><input><p></p>"
+	}
+    content = document.getElementById("content").innerHTML += q.title
+
+    solution = document.getElementById("solution")
+
+
+    function toggle_dark(){
+		document.querySelector("body").classList.toggle("dark-mode")
+		if (localStorage.darkmode=="true"){
+			localStorage.darkmode = false
+		}else{
+			localStorage.darkmode = "true"
+		}
+	}
+
+    function tip(){
+        div = document.getElementById("tip")
+        if (div.innerHTML == ""){
+
+            div.innerHTML = q.tip
+        }else{
+            div.innerHTML = ""
+        }
+
+    }
+
+    function finish(){
+        console.log('finishing ');
+        inputs = document.querySelectorAll("input")
+        answer = []
+        inputs.forEach(element => {
+            if (!element.readOnly)
+            answer.push(element.value)
+        });
+
+        console.log(answer);
+
+        error = []
+        for (let i = 0; i < answer.length; i++) {
+            const ans = answer[i];
+            const sol = s[i]
+            if (ans!=sol && sol != " "){
+                error.push(i)
+            }
+        }
+
+        console.log({error});
+
+        if (error.length == 0) {
+            console.log("success");
+        }else{
+            console.log("fail.");
+            solution.innerHTML += q.title
+
+            inps = solution.querySelectorAll("input")
+            delt = 0
+            for (let i = 0; i < inps.length; i++) {
+                const inp = inps[i];
+                if (!inp.readOnly){
+                    console.log(inp)
+                    console.log(s[i-delt])
+                    inp.value = s[i-delt]
+                    if (error.includes(i-delt)){
+                        inp.style.background = '#0f0'
+                    }
+                }else{delt += 1}
+            }
+        }
+    }
+</script>
+
+<style>
+    body{
+		--darker:rgb(113, 138, 177);
+		--shiny: rgba(255, 255, 255, 0.249);
+		--shadow:rgba(6, 16, 31, 0.292);
+		--lighter:rgb(190, 206, 230);
+		--contrast:rgba(31, 61, 107, 0.556);
+		--const_grey:rgb(81, 116, 153);
+
+		--red:rgb(225, 32, 18);
+		--green:rgb(0, 170, 0);
+		--blue:rgb(0, 102, 255);
+		--color: rgb(4, 14, 22);
+		--yellow: rgb(230,190,0);
+
+        margin:0;
+		background-color: var(--lighter);
+		color: var(--color);
+		font-family: monospace;
+		text-align: center;	
+	}
+
+    .dark-mode{
+		--darker:rgb(6, 16, 32);
+		--shiny: rgba(255, 255, 255, 0.249);
+		--shadow:rgba(6, 16, 31, 0.491);
+		--lighter:rgb(10, 29, 57);
+		--contrast:rgba(47, 108, 200, 0.473);
+
+		--red:rgb(255, 0, 0);
+		--green:rgb(0, 128, 0);
+		--blue:rgb(0, 102, 255);
+		--yellow: rgb(214, 171, 0);
+
+		--color: aliceblue;
+
+		background-color: #111933;
+		font-family: monospace;
+		color: (--color);
+
+	}
+
+    .question{
+        width:80%;
+        margin:auto;
+		margin-top:10vh;
+    }
+
+	
+	.navbar{
+		width:100vw;
+		height:7vh;
+		background-color: var(--darker);
+		box-shadow: 0 .6em 1em var(--shadow);
+		position:fixed;
+		z-index: 100;
+        top:0;
+		
+	}
+	.navbar>*{
+		position: relative;
+		top: 1em;
+		text-decoration: none;
+		font-weight: bolder;
+	}
+	.drmd{
+		all:unset;
+		left:95vw;
+		top:.5em;
+		width:1.5em;
+		position:fixed;
+		font-size: 1.5em;
+		/* background-color: var(--contrast); */
+		background-color: var(--const_grey);
+		color:var(--lighter);
+		border-radius: 1em;
+		border-width: 2px;
+		border-style: solid;
+		z-index: 101;
+		cursor: pointer;
+	}
+
+	button{
+		all:unset;
+		border:unset;
+		background-color: var(--blue);
+		color:(--color);
+		font-size: 1em;
+		padding: .5em;
+		border-radius: .5em;
+		cursor: pointer;
+	}
+    .tipbutton{
+        background-color: var(--yellow);
+    }
+
+	input{
+		background-color: rgb(216, 216, 227);
+		/* border:unset; */
+		border-width: 1px;
+		border-color: black;
+		font-family: monospace;
+		font-size: 1.2em;
+
+	}
+</style>
