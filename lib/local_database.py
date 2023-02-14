@@ -134,7 +134,7 @@ class Collection:
 
     def add_many(self,qs,rating_increment, series_name):
         if series_name in self.info['series']:
-            raise KeyError(f"{series_name} series allready exists if u are trying to replace it call collection.remove_series({series_name})")
+            raise KeyError(f"{series_name} series allready exists if u are trying to replace it call collection.remove_series(\"{series_name}\")")
         self.info['series'][series_name] = get_series_info(series_name,self.info['next_rating'],rating_increment)
         
         if len(qs) < rating_increment:

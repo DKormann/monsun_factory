@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+		<button class = "drmd" onclick="toggle_dark()" >☽</button>
+
+    <div class = navbar>
+   
+    </div>
+
+    <div class = question>
+
+		hello
+    </div>
+</body>
+</html>
+
+<style>
+    body{
+		--darker:rgb(113, 138, 177);
+		--shiny: rgba(255, 255, 255, 0.249);
+		--shadow:rgba(6, 16, 31, 0.292);
+		--lighter:rgb(190, 206, 230);
+		--contrast:rgba(31, 61, 107, 0.556);
+		--const_grey:rgb(81, 116, 153);
+
+		--red:rgb(225, 32, 18);
+		--green:rgb(0, 170, 0);
+		--blue:rgb(0, 102, 255);
+		--color: rgb(4, 14, 22);
+		--yellow: rgb(230,190,0);
+
+        margin:0;
+		background-color: var(--lighter);
+		color: var(--color);
+		font-family: monospace;
+		text-align: center;	
+	}
+
+    .dark-mode{
+		--darker:rgb(6, 16, 32);
+		--shiny: rgba(255, 255, 255, 0.249);
+		--shadow:rgba(6, 16, 31, 0.491);
+		--lighter:rgb(10, 29, 57);
+		--contrast:rgba(47, 108, 200, 0.473);
+
+		--red:rgb(255, 0, 0);
+		--green:rgb(0, 128, 0);
+		--blue:rgb(0, 102, 255);
+		--yellow: rgb(214, 171, 0);
+
+		--color: aliceblue;
+
+		background-color: #111933;
+		font-family: monospace;
+		color: (--color);
+
+	}
+
+    .question{
+        width:80%;
+        margin:auto;
+		margin-top:10vh;
+    }
+
+	
+	.navbar{
+		width:100vw;
+		height:7vh;
+		background-color: var(--darker);
+		box-shadow: 0 .6em 1em var(--shadow);
+		position:fixed;
+		z-index: 100;
+        top:0;
+		
+	}
+	.navbar>*{
+		position: relative;
+		top: 1em;
+		text-decoration: none;
+		font-weight: bolder;
+	}
+	.drmd{
+		all:unset;
+		left:95vw;
+		top:.5em;
+		width:1.5em;
+		position:fixed;
+		font-size: 1.5em;
+		/* background-color: var(--contrast); */
+		background-color: var(--const_grey);
+		color:var(--lighter);
+		border-radius: 1em;
+		border-width: 2px;
+		border-style: solid;
+		z-index: 101;
+		cursor: pointer;
+	}
+
+	button{
+		all:unset;
+		border:unset;
+		background-color: var(--blue);
+		color:(--color);
+		font-size: 1em;
+		padding: .5em;
+		border-radius: .5em;
+		cursor: pointer;
+	}
+    .tipbutton{
+        background-color: var(--yellow);
+    }
+
+	input{
+		background-color: rgb(216, 216, 227);
+		/* border:unset; */
+		border-width: 1px;
+		border-color: black;
+		font-family: monospace;
+		font-size: 1.2em;
+
+	}
+</style>
