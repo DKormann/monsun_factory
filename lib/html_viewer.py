@@ -5,18 +5,9 @@ import json
 import os
 
 
-f=open('./view_template.html')
-view_template = f.read()
-f.close()
-
-f = open("./question_template.html")
-question_template = f.read()
-f.close
-
 comp_template = '''<div class = "graphic" style = "margin:auto;width:80vw;height:{}vw;position:relative">
     {}      
 </div>'''
-
 
 def svg_to_component(svg:str):
     w,h = get_size(svg)
@@ -30,6 +21,11 @@ def get_size(comp):
     return w,h
 
 def component_to_html(comp:str):
+
+    f=open('./templates/view_template.html')
+    view_template = f.read()
+    f.close()
+
     html = view_template.replace("{}",comp)
     return html
 
@@ -46,6 +42,7 @@ def extract_vectorimage(path:str):
     return clean
 
 def browse_html(html,path):
+    path = "views/"+path
     f = open (path,'w')
     f.write(html)
     f.close()
@@ -58,12 +55,46 @@ def view_component(comp):
 
 def view_question(q):
 
+    f = open("./templates/question_template.html")
+    question_template = f.read()
+    f.close
+
     data = json.dumps(q)
     data = json.dumps(data)
     html = question_template.replace("{}",data)
-    f = open ("question.html",'w')
-    f.write(html)
-    f.close()
+    browse_html(html,"question.html")
 
-    print(f"view file://{os.path.abspath('question.html')} in browser")
-    
+
+
+
+def formatter(template):
+    return lambda *x:template.format(*x)
+
+
+tabl = formatter("<br><div class=table>{}</div><br>")
+trow = formatter("<div class=row >{}</div>\n")
+telm = formatter("<div>{}</div>")
+underline ="<div class = underline></div>\n"
+inpt = "<div><input></div>"
+mini_red = formatter("<div class=\"mini row\">{}</div>\n")
+
+def htg(cont):return formatter("<{}>{{}}</{}>".format(cont,cont))
+
+h3 = htg("h3")
+p = htg("p")
+span = htg('span')
+div = htg("div")
+
+def mkrow (a,style = ""):
+    style += " row"
+    res = ""
+    for c in a:
+        res += telm(c) 
+    return "<div class=\"row {}\">{}</div>".format(style,res)
+
+def mktabl(*a):
+    res =""
+    for l in a:
+        res += mkrow(l)
+    return tabl(res)
+

@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Question</title>
+	<link rel="icon" href="icon.svg">
 </head>
 <body>
 		<button class = "drmd" onclick="toggle_dark()" >☽</button>
@@ -17,8 +18,10 @@
 
         
         <div id = content> </div>
-        
+        <p></p>
         <div id =solution></div>
+
+		<p></p>
         
         <button onclick="finish()">finish</button>
         
@@ -37,10 +40,33 @@
     // s = q.solution
     console.log(s);
 
-	if (!q.title.includes("<input")){
+	if (!q.title.includes("<input") && !q.title.includes("<button")){
 		q.title += "<br><input><p></p>"
 	}
-    content = document.getElementById("content").innerHTML += q.title
+
+    content = document.getElementById("content")
+	content.innerHTML += q.title
+
+	
+	var button_answers = []
+
+	if (q.title.includes("<button")){
+		content.querySelectorAll("button").forEach(b =>{
+			
+			let val = b.innerHTML
+			console.log(val)
+			b.addEventListener("click",()=>{
+				b.classList.toggle("active")
+				if(b.classList.contains("active")){
+					button_answers.push(val)
+				}else{
+					button_answers.pop(button_answers.indexOf(val))
+			}
+			})
+
+		})
+	}
+
 
     solution = document.getElementById("solution")
 
@@ -66,6 +92,36 @@
     }
 
     function finish(){
+
+		if (q.title.includes("<button")){
+
+			passed = true
+
+			button_answers.forEach(a => {
+				if (!s.includes(a)){passed = false}
+			})
+			s.forEach(a=>{
+				if(!button_answers.includes(a)){passed = false}
+			})
+
+			if (!passed){
+				console.log("fail");
+				solution.innerHTML += q.title
+				solution.querySelectorAll("button").forEach(b=>{
+					let val = b.innerHTML
+					if (s.includes(val)){
+						b.classList.toggle("active")
+					}
+				})
+			}else{
+				console.log('passed');
+				solution.innerHTML += "correct!"
+			}
+
+			return
+		}
+		
+
         console.log('finishing ');
         inputs = document.querySelectorAll("input")
         answer = []
@@ -89,6 +145,7 @@
 
         if (error.length == 0) {
             console.log("success");
+			solution.innerHTML += "correct!"
         }else{
             console.log("fail.");
             solution.innerHTML += q.title
@@ -193,7 +250,7 @@
 	}
 
 	button{
-		all:unset;
+
 		border:unset;
 		background-color: var(--blue);
 		color:(--color);
@@ -201,6 +258,10 @@
 		padding: .5em;
 		border-radius: .5em;
 		cursor: pointer;
+	}
+	button.active{
+		background-color: var(--yellow);
+		color:var(--blue)
 	}
     .tipbutton{
         background-color: var(--yellow);

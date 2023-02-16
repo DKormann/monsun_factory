@@ -1,4 +1,5 @@
 import json
+import random
 import os
 
 from typing import List, Mapping
@@ -134,7 +135,8 @@ class Collection:
 
     def add_many(self,qs,rating_increment, series_name):
         if series_name in self.info['series']:
-            raise KeyError(f"{series_name} series allready exists if u are trying to replace it call collection.remove_series(\"{series_name}\")")
+            print (f"error: {series_name} series allready exists if u are trying to replace it call collection.remove_series(\"{series_name}\")")
+            return 
         self.info['series'][series_name] = get_series_info(series_name,self.info['next_rating'],rating_increment)
         
         if len(qs) < rating_increment:
@@ -162,21 +164,37 @@ def get_series_info(name,min_rating,rating_range):
         "min_rating":min_rating,
         "rating_range":rating_range,}
 
-def get_question (tit,sol,tit_params,tip,style=""):
+def get_question (tit,sol:any,tit_params,tip,style=""):
 
     assert tit.count('{}') == tit.count('{') , "title wrong format if u want to include css do it in the style parameter"
     assert len ( tit_params) >= tit.count('{}'), 'params has not enough items to fill the title'
 
 
+    # make sol a json rep of list of string or number solutions
     if type(sol) in [int,float]:
         sol = [sol]
-    
+    if type(sol) == str:
+        sol:str = sol
+        if not sol.find("[") == -1:
+            sol = [sol]
     if type (sol) ==list:
         sol = json.dumps(sol)
-
 
     return {
         "title":tit.format(*tit_params)+style,
         "solution":sol,
         "tip":tip
     }
+
+
+def option_question(title,correct_options:list[str],wrong_options:list[str],tip ,style = ""):
+
+    title = f"<h3>{title}</h3><br>"
+    options = correct_options + wrong_options
+    options = random.sample(options,len(options))
+    for option in options:
+        title += f"<button>{option}</button>\n"
+    
+    correct_options = list(map(str, correct_options))
+
+    return get_question(title,correct_options,[],tip,style)

@@ -1,3 +1,6 @@
-push_json.sh
 __pycache__
 .ipynb_checkpoints
+db_connector/
+.gitignore
+views/index.html
+views/question.html
