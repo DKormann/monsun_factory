@@ -1,137 +1,39 @@
 {
     "course": "math",
     "niveau": "C",
-    "series": {
-        "wertetafel": {
-            "name": "wertetafel",
-            "min_rating": 0,
-            "rating_range": 5
-        },
-        "nachbartausender": {
-            "name": "nachbartausender",
-            "min_rating": 5,
-            "rating_range": 3
-        },
-        "compare_big": {
-            "name": "compare_big",
-            "min_rating": 8,
-            "rating_range": 5
-        },
-        "zahlenstrahl": {
-            "name": "zahlenstrahl",
-            "min_rating": 13,
-            "rating_range": 2
-        },
-        "zahlenreihe": {
-            "name": "zahlenreihe",
-            "min_rating": 15,
-            "rating_range": 5
-        },
-        "runde": {
-            "name": "runde",
-            "min_rating": 20,
-            "rating_range": 12
-        },
-        "ueberschlag": {
-            "name": "ueberschlag",
-            "min_rating": 32,
-            "rating_range": 5
-        },
-        "schr_add": {
-            "name": "schr_add",
-            "min_rating": 37,
-            "rating_range": 15
-        },
-        "schr_add_erg": {
-            "name": "schr_add_erg",
-            "min_rating": 52,
-            "rating_range": 10
-        },
-        "schr_sub": {
-            "name": "schr_sub",
-            "min_rating": 62,
-            "rating_range": 15
-        },
-        "schr_sub_erg": {
-            "name": "schr_sub_erg",
-            "min_rating": 77,
-            "rating_range": 10
-        },
-        "gross_mul": {
-            "name": "gross_mul",
-            "min_rating": 87,
-            "rating_range": 5
-        },
-        "big_fract": {
-            "name": "big_fract",
-            "min_rating": 92,
-            "rating_range": 10
-        },
-        "schr_mul": {
-            "name": "schr_mul",
-            "min_rating": 102,
-            "rating_range": 15
-        },
-        "schr_mul_2": {
-            "name": "schr_mul_2",
-            "min_rating": 117,
-            "rating_range": 10
-        },
-        "mul_round": {
-            "name": "mul_round",
-            "min_rating": 127,
-            "rating_range": 4
-        },
-        "schr_div": {
-            "name": "schr_div",
-            "min_rating": 131,
-            "rating_range": 15
-        },
-        "div_round": {
-            "name": "div_round",
-            "min_rating": 152,
-            "rating_range": 6
-        },
-        "div_rest": {
-            "name": "div_rest",
-            "min_rating": 158,
-            "rating_range": 10
-        },
-        "teilbarkeit": {
-            "name": "teilbarkeit",
-            "min_rating": 168,
-            "rating_range": 15
-        },
-        "zeitangaben vergleichen": {
-            "name": "zeitangaben vergleichen",
-            "min_rating": 183,
-            "rating_range": 5
-        },
-        "zeitangaben umwandeln": {
-            "name": "zeitangaben umwandeln",
-            "min_rating": 188,
-            "rating_range": 5
-        },
-        "money convert": {
-            "name": "money convert",
-            "min_rating": 193,
-            "rating_range": 4
-        },
-        "l\u00e4ngenangaben sch\u00e4tzen": {
-            "name": "l\u00e4ngenangaben sch\u00e4tzen",
-            "min_rating": 197,
-            "rating_range": 4
-        },
-        "l\u00e4ngen umwandeln": {
-            "name": "l\u00e4ngen umwandeln",
-            "min_rating": 201,
-            "rating_range": 5
-        },
-        "diagram lesen": {
-            "name": "diagram lesen",
-            "min_rating": 206,
-            "rating_range": 4
-        }
-    },
-    "next_rating": 210
+    "series_names": [
+        "Wertetafel",
+        "Gro\u00dfe Nachbarzahlen",
+        "Zahlen vergleichen",
+        "zahlenstrahl",
+        "zahlenreihe",
+        "Runden",
+        "\u00fcberschlag",
+        "schriftliche addition",
+        "schriftliche addition erg\u00e4nzen",
+        "schriftliche subtraktion",
+        "schriftliche subtraktion erg\u00e4nzen",
+        "gro\u00dfe multiplikation",
+        "gro\u00dfe division",
+        "schriftliche multiplikation",
+        "schriftliche multiplikation zweistellig",
+        "runden bei mulitiplikation",
+        "schrifltiche division",
+        "runden bei division",
+        "schriftliche division mit rest",
+        "teilbarkeit",
+        "zeitangaben vergleichen",
+        "zeitangaben umwandeln",
+        "geldangaben vergleichen",
+        "l\u00e4ngenangaben sch\u00e4tzen",
+        "l\u00e4ngen umwandeln",
+        "diagram lesen",
+        "fl\u00e4che bestimmen",
+        "fl\u00e4che bestimmen 2",
+        "umfang bestimmen",
+        "achsensymmetrie",
+        "rotations symmetrie",
+        "perspektivische ansichten"
+    ],
+    "rating_range": 237.00000000000105
 }

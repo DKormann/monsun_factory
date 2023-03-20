@@ -22,6 +22,21 @@
 </body>
 </html>
 
+<script>
+
+	function toggle_dark(){
+		document.querySelector("body").classList.toggle("dark-mode")
+		if (localStorage.darkmode=="true"){
+			localStorage.darkmode = false
+		}else{
+			localStorage.darkmode = true
+		}
+	}
+	if (localStorage.darkmode == 'true'){
+		document.querySelector("body").classList.toggle("dark-mode")
+	}
+</script>
+
 <style>
     body{
 		--darker:rgb(113, 138, 177);
@@ -61,7 +76,6 @@
 		background-color: #111933;
 		font-family: monospace;
 		color: (--color);
-
 	}
 
     .question{
@@ -70,7 +84,51 @@
 		margin-top:10vh;
     }
 
+	.table{
+		color:black;
+		background-color:white;
+        margin:auto;
+        border:1px solid black;
+
+	}
+
+	.row{
+        width:100%;
+        height:1em;
+        display:flex;
+    }
+
+    .row>div{
+        flex:1;
+        height:1em;
+        position:relative;
+        border-bottom:1px solid black;
+        border-right:1px solid black;
+    }
+
+    .underline{
+        border:1px solid black;
+        width:inherit;
+        margin:auto;
+        position:absolute;
+    }
 	
+    .row>div>input{
+		all:unset;
+        width:.8em;
+        height:.8em;
+        background-color:aliceblue;
+    }
+    .mini{
+        color:red;
+		/* font-size: .7em; */
+    }
+
+    .mini>div>input{
+        font-size:.7em;
+		color:red;
+    }
+
 	.navbar{
 		width:100vw;
 		height:7vh;
@@ -79,7 +137,6 @@
 		position:fixed;
 		z-index: 100;
         top:0;
-		
 	}
 	.navbar>*{
 		position: relative;
@@ -103,7 +160,6 @@
 		z-index: 101;
 		cursor: pointer;
 	}
-
 	button{
 		all:unset;
 		border:unset;
@@ -114,10 +170,12 @@
 		border-radius: .5em;
 		cursor: pointer;
 	}
+	button.active{
+		background-color: var(--yellow);
+	}
     .tipbutton{
         background-color: var(--yellow);
     }
-
 	input{
 		background-color: rgb(216, 216, 227);
 		/* border:unset; */
@@ -125,6 +183,6 @@
 		border-color: black;
 		font-family: monospace;
 		font-size: 1.2em;
-
+		color:black;
 	}
 </style>

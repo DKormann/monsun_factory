@@ -1,6 +1,44 @@
 {
     "version": "0.0.1",
-    "collections": [
-        "math_C"
-    ]
+    "courses": {
+        "math": {
+            "C": [
+                "Wertetafel",
+                "Gro\u00dfe Nachbarzahlen",
+                "Zahlen vergleichen",
+                "zahlenstrahl",
+                "zahlenreihe",
+                "Runden",
+                "\u00fcberschlag",
+                "schriftliche addition",
+                "schriftliche addition erg\u00e4nzen",
+                "schriftliche subtraktion",
+                "schriftliche subtraktion erg\u00e4nzen",
+                "gro\u00dfe multiplikation",
+                "gro\u00dfe division",
+                "schriftliche multiplikation",
+                "schriftliche multiplikation zweistellig",
+                "runden bei mulitiplikation",
+                "schrifltiche division",
+                "runden bei division",
+                "schriftliche division mit rest",
+                "teilbarkeit",
+                "zeitangaben vergleichen",
+                "zeitangaben umwandeln",
+                "geldangaben vergleichen",
+                "l\u00e4ngenangaben sch\u00e4tzen",
+                "l\u00e4ngen umwandeln",
+                "diagram lesen",
+                "fl\u00e4che bestimmen",
+                "fl\u00e4che bestimmen 2",
+                "umfang bestimmen",
+                "achsensymmetrie",
+                "rotations symmetrie",
+                "perspektivische ansichten"
+            ],
+            "msa": [
+                "gegenwinkel"
+            ]
+        }
+    }
 }

@@ -1,0 +1,155 @@
+
+<div class = question id = "question_id_">
+
+    <div id = content> </div>
+    <p></p>
+    <div id =solution></div>
+
+    <p></p>
+    
+    <button onclick="finish_id_()">finish</button>
+    
+    <button onclick="tip_id_()" class = tipbutton>tip?</button>
+    <div id=tip></div>
+
+
+
+    <script>
+
+        var me_id_ = document.getElementById("question_id_")
+
+        console.log(me_id_)
+
+        var json_id_ = {}
+        var q_id_ = JSON.parse(json_id_)
+        var s_id_ = JSON.parse(q_id_.solution)
+        // s = q.solution
+        console.log(s_id_);
+
+        if (!q_id_.title.includes("<input") && !q_id_.title.includes("<button")){
+            q_id_.title += "<br><input><p></p>"
+        }
+
+        var content_id_ = me_id_.querySelector("#content")
+        content_id_.innerHTML += q_id_.title
+
+        
+        var button_answers_id_ = []
+
+        if (q_id_.title.includes("<button")){
+            content_id_.querySelectorAll("button").forEach(b =>{
+                
+                let val = b.innerHTML
+                console.log(val)
+                console.log(b);
+                b.addEventListener("click",()=>{
+                    console.log('clivked:',b);
+
+                    b.classList.toggle("active")
+                    if(b.classList.contains("active")){
+                        button_answers_id_.push(val)
+                    }else{
+                        console.log('removing',val);
+                        button_answers_id_ = button_answers_id_.filter(a=>a!=val)
+                        console.log(button_answers_id_);
+                }
+                })
+
+            })
+        }
+
+
+        var solution_id_ = me_id_.querySelector("#solution")
+
+
+        function tip_id_(){
+            div = me_id_.querySelector("#tip")
+            if (div.innerHTML == ""){
+
+                div.innerHTML = q_id_.tip
+            }else{
+                div.innerHTML = ""
+            }
+
+        }
+
+        function finish_id_(){
+
+            if (q_id_.title.includes("<button")){
+
+                passed = true
+
+                button_answers_id_.forEach(a => {
+                    if (!s_id_.includes(a)){passed = false}
+                })
+                s_id_.forEach(a=>{
+                    if(!button_answers_id_.includes(a)){passed = false}
+                })
+
+                if (!passed){
+                    console.log("fail");
+                    solution_id_.innerHTML += q_id_.title
+                    solution_id_.querySelectorAll("button").forEach(b=>{
+                        let val = b.innerHTML
+                        if (s_id_.includes(val)){
+                            b.classList.toggle("active")
+                        }
+                    })
+                }else{
+                    console.log('passed');
+                    solution_id_.innerHTML += "correct!"
+                }
+
+                return
+            }
+            
+
+            console.log('finishing ');
+            inputs = me_id_.querySelectorAll("input")
+            answer = []
+            inputs.forEach(element => {
+                if (!element.readOnly)
+                answer.push(element.value)
+            });
+
+            console.log(answer);
+
+            error = []
+            for (let i = 0; i < answer.length; i++) {
+                const ans = answer[i];
+                const sol = s_id_[i]
+                if (ans!=sol && sol != " "){
+                    error.push(i)
+                }
+            }
+
+            console.log({error});
+
+            if (error.length == 0) {
+                console.log("success");
+                solution_id_.innerHTML += "correct!"
+            }else{
+                console.log("fail.");
+                solution_id_.innerHTML += q_id_.title
+
+                inps = solution_id_.querySelectorAll("input")
+                delt = 0
+                for (let i = 0; i < inps.length; i++) {
+                    const inp = inps[i];
+                    if (!inp.readOnly){
+                        console.log(inp)
+                        console.log(s_id_[i-delt])
+                        inp.value = s_id_[i-delt]
+                        if (error.includes(i-delt)){
+                            inp.style.background = '#0f0'
+                        }
+                    }else{delt += 1}
+                }
+            }
+        }
+    </script>
+
+
+
+</div>
+
