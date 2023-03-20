@@ -47,33 +47,34 @@ def browse_html(html,path):
     f.write(html)
     f.close()
     print(f"view file://{os.path.abspath(path)} in browser")
-    
-
-def view_component(comp):
-    html = component_to_html(comp)
-    browse_html(html,'index.html')
-
-def view_question(q):
-
-    f = open("./templates/question_template.html")
-    question_template = f.read()
-    f.close
-
-    data = json.dumps(q)
-    data = json.dumps(data)
-    html = question_template.replace("{}",data)
-    browse_html(html,"question.html")
 
 
+def view_questions (*qs,path='index.html'):
+    f = open('templates/question_div.html')
+    qtemp = f.read()
+    f.close()
+
+    content = []
+    for i,q in enumerate(qs):
+        id = f'_id{i}_'
+        data = q.dumps()
+        data = json.dumps(data)
+        content.append(qtemp.replace("_id_",id).replace("{}",data))
+
+    view_components(*content,path = path)
 
 
 def formatter(template):
     return lambda *x:template.format(*x)
 
 
-tabl = formatter("<br><div class=table>{}</div><br>")
+def tabl(w,h,*content):
+    content = "\n".join(content)
+    return "<br><div class=table style=\"width:{}em;height:{}em\" >{}</div><br>".format(w,h,content)
+
 trow = formatter("<div class=row >{}</div>\n")
 telm = formatter("<div>{}</div>")
+empty =telm("")
 underline ="<div class = underline></div>\n"
 inpt = "<div><input></div>"
 mini_red = formatter("<div class=\"mini row\">{}</div>\n")
@@ -92,9 +93,12 @@ def mkrow (a,style = ""):
         res += telm(c) 
     return "<div class=\"row {}\">{}</div>".format(style,res)
 
-def mktabl(*a):
+def mktabl(w,h,*a):
     res =""
     for l in a:
         res += mkrow(l)
     return tabl(res)
 
+def view_components(*comps,path='index.html'):
+    html = component_to_html(''.join(comps))
+    browse_html(html,path)
